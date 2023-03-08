@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+	This is the assignment
+	</title>
+<style type="text/css">
+	h3{margin-left: 15px;
+		margin-right: 10px;
+		border-left:solid blue 8px;
+		background-color: violet!important;}
+button{
+	border-radius: 18px;
+	background-color: #000000;
+	box-shadow: 10px;
+        text-decoration-color: violet;
+	font-weight: bold;
+	font-family: cooper;
+	text-decoration:none ;
+	align: right;}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body bgcolor="#6495ED">
+	
+	<div>
+		<h1 style="font-family:arial;color:antiquewhite;"title="AL">MicroProcessor and Assembly Language programming</h1>
+                <h2 style="font-family:arial;color:antiquewhite;"title="AL">Assignment 2/group</h2>
+	</div> 
+1. Write an Assembly language program to add a number 5 times using loop<br><br>
+.model small<br>
+.stack 100h<br>
+.data<br>
+ num dw 05h ;initialize the number to add <br>
+ count dw 05h ;initialize the loop counter<br>
+ result dw 00h;initialize the result to zero<br> 
+ .code<br>
+ main proc<br>
+     mov ax,@data<br>
+     mov ds,ax;initialize data segment<br>
+     mov cx,count;load loop counter<br>
+     mov bx,num ;load number to add<br>
+     add_loop:<br>
+     add result, bx;add number to result<br>
+     loop add_loop counter and loop if not zero<br>
+     mov ah,4ch;return control to DOS INT 21H<br>
+     main endp<br>
+ end main<br><br>
+2. Write an ALP to print hello world using INT 21H<br><br>
+
+  .model small<br>
+  .data<br>
+    msg db 10d, 13d,"hello world $"<br>
+    .code<br>
+     mov ax,@data<br>
+     mov ds,ax<br>
+     lea dx,msg<br>
+     mov ah,09h<br>
+     int 21h<br>
+     mov ah,4ch<br>
+     int 21h<br>
+     end<br><br>
+3. Write any ALP to show the usage of CMP<br><br>
+
+.model small<br>
+.data<br>
+.code<br>
+main proc<br>
+    mov ax,1250<br>
+    mov bx,1270<br>
+    cmp ax,bx<br>
+    endp<br>
+            
+    end main <br><br>
+4. Write an ALP to show the usage of JN<br><br>
+ORG 0000h ;Set the origin address to 0000h<br>
+START:MOV AX,0; Move the value 0 into AX<br>
+SUB AX,1 ; Substract 1 from AX<br>
+JMP NEGATIVE ;Jump to the NEGATIVE label if the result  of the substraction is negative<br>
+JMP END ;Otherwise,jump to the END label <br>
+NEGATIVE:<br>
+MOV BX,1 ;Move the value 1 into BX<br>
+END:MOV AH,4ch; Set the exit code to 4ch<br>
+INT 21H ; Exit the program<br>
+END START; End the program and set the starting address to START<br><br>
+5. Write an ALP that prints out 10 fibonacci serious.<br><br>
+
+.model small<br>
+.stack 100h<br>
+
+.data<br>
+fib db 0,1<br>
+msg"Fibonacci Numbers:$"<br>
+
+.code<br>
+main proc<br>
+    mov ax,@data<br>
+    mov ds,ax<br>
+    
+    ;print message<br>
+    mov ah,09h<br>
+    lea dx,msg<br>
+    int 21h<br>
+    
+    ;initialize loop counter<br>
+    mov cx,10<br>
+    
+    ;calculate and print Fibonacci numbersL1:<br>
+    mov al,[fib+1]<br>
+    add al,[fib]<br>
+    mov[fib],[fib+1]<br>
+    mov[fib+1],al<br>
+    ;print current Fibonacci number<br>
+    mov ah,02h<br>
+    mov dl,al<br>
+    add dl,30h<br>
+    int 21h<br>
+    ;print space character<br>
+    mov dl,''<br>
+    int 21h<br>
+    loop L1<br>
+    
+    ;exit program<br>
+    mov ah,4ch<br>
+    int 21h<br>
+    main endp<br>
+end main<br><br>
+<h2>Group members</h2>
+<table border="1">
+<tr>
+<th>Name</th>
+    <th>ID</th>
+</tr>
+<tr>
+<td>Sifan Bekele</td>
+<td>UGE/18734/12</td>
+</tr>
+<tr>
+<td>Derartu Lemi</td>
+<td>UGE/18703/12</td>
+</tr>
+<tr>
+<td>Sosina Tadesse</td>
+<td>UGE/18736/12</td>
+</tr>
+<tr>
+<td>Kenenisa Assefa</td>
+<td>UGE/18899/12</td>
+</tr>
+<tr>
+<td>Biruk  Asefa</td>
+<td>UGE/19372/12</td>
+</table>
+</body>
+</html>
+</tr>
+</tr>
